@@ -4,11 +4,13 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import com.system.blog.sms.dto.CommentDTO;
 import com.system.blog.sms.entity.Comment;
 import com.system.blog.sms.entity.Publication;
+import com.system.blog.sms.exceptions.BlogAppException;
 import com.system.blog.sms.exceptions.ResourceNotFoundException;
 import com.system.blog.sms.repository.CommentRepository;
 import com.system.blog.sms.repository.PublicationRepository;
@@ -58,5 +60,20 @@ public class CommentServiceImpl implements CommentService{
 		// TODO Auto-generated method stub
 		List<Comment> comments = commentRepository.findByPublicationId(publicationId);		
 		return comments.stream().map(comment -> mapperDTO(comment)).collect(Collectors.toList());
+	}
+
+	@Override
+	public CommentDTO getCommentForId(Long publicationId, Long commentId) {
+		// TODO Auto-generated method stub
+		Publication publication = publicationRepository.findById(publicationId)
+				.orElseThrow(() -> new ResourceNotFoundException("Publication","id",publicationId));
+		Comment comment = commentRepository.findById(commentId)
+				.orElseThrow(() -> new ResourceNotFoundException("Comment","id",commentId));
+		
+		if(!comment.getPublication().getId().equals(publication.getId())) {
+			throw new BlogAppException(HttpStatus.BAD_REQUEST, "The comment don't belong to the publication");
+		}
+		
+		return mapperDTO(comment);
 	}
 }
