@@ -96,4 +96,19 @@ public class CommentServiceImpl implements CommentService {
 		Comment commentUpdated = commentRepository.save(comment);
 		return mapperDTO(commentUpdated);
 	}
+
+	@Override
+	public void deleteComment(Long publicationId, Long commentId) {
+		// TODO Auto-generated method stub
+		Publication publication = publicationRepository.findById(publicationId)
+				.orElseThrow(() -> new ResourceNotFoundException("Publication", "id", publicationId));
+		Comment comment = commentRepository.findById(commentId)
+				.orElseThrow(() -> new ResourceNotFoundException("Comment", "id", commentId));
+
+		if (!comment.getPublication().getId().equals(publication.getId())) {
+			throw new BlogAppException(HttpStatus.BAD_REQUEST, "The comment don't belong to the publication");
+		}
+		
+		commentRepository.delete(comment);
+	}
 }
