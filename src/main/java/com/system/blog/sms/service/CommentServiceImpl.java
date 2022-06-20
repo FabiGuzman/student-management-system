@@ -1,5 +1,8 @@
 package com.system.blog.sms.service;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -48,5 +51,12 @@ public class CommentServiceImpl implements CommentService{
 		comment.setBody(commentDTO.getBody());
 		
 		return comment;
+	}
+
+	@Override
+	public List<CommentDTO> getCommentsForPublicationId(long publicationId) {
+		// TODO Auto-generated method stub
+		List<Comment> comments = commentRepository.findByPublicationId(publicationId);		
+		return comments.stream().map(comment -> mapperDTO(comment)).collect(Collectors.toList());
 	}
 }

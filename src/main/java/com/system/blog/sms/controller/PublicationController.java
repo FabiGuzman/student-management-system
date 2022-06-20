@@ -56,4 +56,5 @@ public class PublicationController {
 		publicationService.deletePublication(id);
 		return new ResponseEntity<>("Publication deleted successfully", HttpStatus.OK);
 	}
+	
 }
