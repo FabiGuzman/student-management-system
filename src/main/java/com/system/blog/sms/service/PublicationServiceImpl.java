@@ -2,6 +2,8 @@ package com.system.blog.sms.service;
 
 import java.util.List;
 import java.util.stream.Collectors;
+
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -19,6 +21,9 @@ public class PublicationServiceImpl implements PublicationService {
 
 	@Autowired
 	private PublicationRepository publicationRepository;
+	
+	@Autowired
+	private ModelMapper modelMapper;
 
 	@Override
 	public PublicationDTO createPublication(PublicationDTO publicationDTO) {
@@ -50,21 +55,13 @@ public class PublicationServiceImpl implements PublicationService {
 
 	// Convert Entity to DTO
 	private PublicationDTO mapperDTO(Publication publication) {
-		PublicationDTO publicationDTO = new PublicationDTO();
-		publicationDTO.setId(publication.getId());
-		publicationDTO.setTitle(publication.getTitle());
-		publicationDTO.setDescription(publication.getDescription());
-		publicationDTO.setContent(publication.getContent());
+		PublicationDTO publicationDTO = modelMapper.map(publication,PublicationDTO.class);
 		return publicationDTO;
 	}
 
 	// Convert Entity to DTO
 	private Publication mapperEntity(PublicationDTO publicationDTO) {
-		Publication publication = new Publication();
-		// publicationDTO.setId(publication.getId());
-		publication.setTitle(publicationDTO.getTitle());
-		publication.setDescription(publicationDTO.getDescription());
-		publication.setContent(publicationDTO.getContent());
+		Publication publication = modelMapper.map(publicationDTO, Publication.class);
 		return publication;
 	}
 

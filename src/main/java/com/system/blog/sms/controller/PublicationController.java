@@ -32,8 +32,8 @@ public class PublicationController {
 
 	@GetMapping
 	public PublicationResponse listPublications(
-			@RequestParam(value = "pageNo", defaultValue = AppConstants.MEASURE_PAGE_FOR_DEFAULT, required = false) int pageNumber,
-			@RequestParam(value = "pageSize", defaultValue = AppConstants.NUMBER_PAGE_FOR_DEFAULT, required = false) int measureOfPage,
+			@RequestParam(value = "pageNo", defaultValue = AppConstants.NUMBER_PAGE_FOR_DEFAULT, required = false) int pageNumber,
+			@RequestParam(value = "pageSize", defaultValue = AppConstants.MEASURE_PAGE_FOR_DEFAULT, required = false) int measureOfPage,
 			@RequestParam(value = "sortBy", defaultValue = AppConstants.ORDERBY_FOR_DEFAULT, required = false) String orderBy,
 			@RequestParam(value = "sortDir", defaultValue = AppConstants.ORDER_DIRECTION_FOR_DEFAULT, required = false) String sortDir) {
 		return publicationService.getAllPublications(pageNumber, measureOfPage, orderBy, sortDir);

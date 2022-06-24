@@ -13,8 +13,10 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 @Entity
-@Table(name = "publications", uniqueConstraints = { @UniqueConstraint(columnNames = {"title"}) })
+@Table(name = "publications", uniqueConstraints = { @UniqueConstraint(columnNames = { "title" }) })
 public class Publication {
 
 	@Column(name = "title", nullable = false)
@@ -38,13 +40,23 @@ public class Publication {
 		this.id = id;
 	}
 
+	
+	public Set<Comment> getComments() {
+		return comments;
+	}
+
+	public void setComments(Set<Comment> comments) {
+		this.comments = comments;
+	}
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
+	@JsonBackReference
 	@OneToMany(mappedBy = "publication", cascade = CascadeType.ALL, orphanRemoval = true)
 	private Set<Comment> comments = new HashSet<>();
-	
+
 	public Long getId() {
 		return id;
 	}
