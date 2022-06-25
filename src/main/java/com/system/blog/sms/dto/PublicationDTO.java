@@ -18,6 +18,7 @@ public class PublicationDTO {
 	@Size(min = 10,message = "The title of description must be has at least ten characters")	
 	private String description;
 	
+	@NotEmpty
 	private String content;
 	
 	private Set<Comment> comments;
