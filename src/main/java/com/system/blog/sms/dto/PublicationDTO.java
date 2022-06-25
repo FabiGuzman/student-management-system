@@ -7,9 +7,15 @@ import com.system.blog.sms.entity.Comment;
 public class PublicationDTO {
 
 	private Long id;
+	
+	//@NotEmpt
+	//@Size(min = 2,message = "The title of publication")
 	private String title;
+	
 	private String description;
+	
 	private String content;
+	
 	private Set<Comment> comments;
 
 	public PublicationDTO() {
@@ -54,6 +60,6 @@ public class PublicationDTO {
 
 	public void setComments(Set<Comment> comments) {
 		this.comments = comments;
-	}	
+	}
 
 }

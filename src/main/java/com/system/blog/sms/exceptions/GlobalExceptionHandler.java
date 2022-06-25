@@ -18,4 +18,17 @@ public class GlobalExceptionHandler {
 		ErrorDetails errorDetails = new ErrorDetails(new Date(), exception.getMessage(),webRequest.getDescription(false));
 		return new ResponseEntity<>(errorDetails,HttpStatus.NOT_FOUND);
 	}
+	
+	@ExceptionHandler(BlogAppException.class)
+	public ResponseEntity<ErrorDetails> handlerBlogAppException(BlogAppException exception, WebRequest webRequest) {
+		ErrorDetails errorDetails = new ErrorDetails(new Date(), exception.getMessage(),webRequest.getDescription(false));
+		return new ResponseEntity<>(errorDetails,HttpStatus.BAD_REQUEST);
+	}
+	
+	@ExceptionHandler(Exception.class)
+	public ResponseEntity<ErrorDetails> handlerGlobalException(Exception exception, WebRequest webRequest) {
+		ErrorDetails errorDetails = new ErrorDetails(new Date(), exception.getMessage(),webRequest.getDescription(false));
+		return new ResponseEntity<>(errorDetails,HttpStatus.INTERNAL_SERVER_ERROR);
+	}	
+	
 }
