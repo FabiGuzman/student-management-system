@@ -2,16 +2,20 @@ package com.system.blog.sms.dto;
 
 import java.util.Set;
 
+import javax.validation.constraints.Size;
+import javax.validation.constraints.NotEmpty;
 import com.system.blog.sms.entity.Comment;
 
 public class PublicationDTO {
 
 	private Long id;
 	
-	//@NotEmpt
-	//@Size(min = 2,message = "The title of publication")
+	@NotEmpty
+	@Size(min = 2,message = "The title of publication must be has at least two characters")
 	private String title;
 	
+	@NotEmpty
+	@Size(min = 10,message = "The title of description must be has at least ten characters")	
 	private String description;
 	
 	private String content;

@@ -5,6 +5,7 @@ com\system\blog\sms\service\CommentService.class
 com\system\blog\sms\repository\PublicationRepository.class
 com\system\blog\sms\repository\CommentRepository.class
 com\system\blog\sms\entity\Publication.class
+com\system\blog\sms\dto\ErrorDetails.class
 com\system\blog\sms\service\PublicationServiceImpl.class
 com\system\blog\sms\dto\PublicationResponse.class
 com\system\blog\sms\entity\Comment.class
@@ -14,4 +15,5 @@ com\system\blog\sms\dto\CommentDTO.class
 com\system\blog\sms\exceptions\BlogAppException.class
 com\system\blog\sms\exceptions\ResourceNotFoundException.class
 com\system\blog\sms\controller\PublicationController.class
+com\system\blog\sms\exceptions\GlobalExceptionHandler.class
 com\system\blog\sms\utils\AppConstants.class
