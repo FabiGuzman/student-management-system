@@ -1,10 +1,22 @@
 package com.system.blog.sms.dto;
 
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
+
 public class CommentDTO {
 
 	private long id;
+	
+	@NotEmpty(message = "The name don't must be empty or null")
 	private String name;
+	
+	@NotEmpty(message = "The email don't must be empty or null")
+	@Email
 	private String email;
+	
+	@NotEmpty
+	@Size(min = 10, message = "The body of commentary must have at least ten characters")
 	private String body;
 
 	public long getId() {
